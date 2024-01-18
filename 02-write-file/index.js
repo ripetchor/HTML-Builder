@@ -7,7 +7,7 @@ const writeFile = ({ fileName, readStream = stdin }) => {
 
   const writeStream = createWriteStream(pathToFile);
 
-  stdout.write('Hello!\n');
+  stdout.write('Hello! Enter text:\n');
 
   readStream.on('data', (data) => {
     const input = data.toString().trim();
