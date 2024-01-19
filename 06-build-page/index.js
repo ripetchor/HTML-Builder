@@ -155,15 +155,15 @@ class HTMLBuilder {
         const direntPath = path.resolve(dirName, dirent.name);
 
         if (dirent.isFile()) {
-          return await unlink(direntPath);
+          await unlink(direntPath);
         }
 
         if (dirent.isDirectory()) {
-          return await rm(direntPath, { recursive: true });
+          await rm(direntPath, { recursive: true });
         }
       });
 
-      return await Promise.all(direntsPromises);
+      await Promise.all(direntsPromises);
     } catch (error) {
       throw new Error(error);
     }
@@ -174,7 +174,7 @@ class HTMLBuilder {
       const readStream = createReadStream(srcFile);
       const writeStream = createWriteStream(destFile);
 
-      return await pipeline(readStream, writeStream);
+      await pipeline(readStream, writeStream);
     } catch (error) {
       throw new Error(error);
     }
