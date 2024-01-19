@@ -151,7 +151,7 @@ class HTMLBuilder {
     try {
       const dirents = await readdir(dirName, { withFileTypes: true });
 
-      const direntsPromises = dirents.map(async (dirent) => {
+      for await (const dirent of dirents) {
         const direntPath = path.resolve(dirName, dirent.name);
 
         if (dirent.isFile()) {
@@ -161,9 +161,7 @@ class HTMLBuilder {
         if (dirent.isDirectory()) {
           await rm(direntPath, { recursive: true });
         }
-      });
-
-      await Promise.all(direntsPromises);
+      }
     } catch (error) {
       throw new Error(error);
     }
