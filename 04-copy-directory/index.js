@@ -11,7 +11,7 @@ const copyFile = async ({ srcFile, destFile }) => {
     const readStream = createReadStream(pathToSrcFile);
     const writeStream = createWriteStream(pathToDestFile);
 
-    return await pipeline(readStream, writeStream);
+    await pipeline(readStream, writeStream);
   } catch (error) {
     throw new Error(error);
   }
